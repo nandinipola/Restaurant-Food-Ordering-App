@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  UserMicrocontroller:
+    build: .\UserMicroservice\UserMicroservice
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    #   args:
+    #     some-arg: 1
+    ports:
+      - '5000:80'
+      - '4000:443'
+    OrderMicrocontroller:
+    build: .\OrderMicroservice\OrderMicroservice
+    ports:
+      - '5001:80'
+      - '4001:443'
+    FoodItemMicrocontroller:
+    build: .\FoodItemMicroservice\FoodItemMicroservice
+    ports:
+      - '5002:80'
+      - '4002:443'
+  frontend:
+    build: ./frontend
+    ports: 
+      - '3000:3000'
+    volumes: 
+      - ./frontend/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on: 
+      - UserMicroservice
+      - FoodMicroservice
+      - OrderMicroservice
+
+
