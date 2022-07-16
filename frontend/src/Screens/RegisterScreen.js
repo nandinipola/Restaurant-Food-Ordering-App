@@ -25,6 +25,17 @@ const RegisterScreen = () => {
   }, [token, error,loading,navigate,RegisterMessage]);
   const submitHandler = (e) => {
     e.preventDefault();
+
+    var lowerCaseLetters = /[a-z]/g;
+    var upperCaseLetters = /[A-Z]/g;
+    var numbers = /[0-9]/g;
+    if(password.match(lowerCaseLetters)==null || password.match(upperCaseLetters)==null || password.match(numbers)==null){
+      alert("Use Alphanumeric");
+      return;
+    }
+    else{
+      console.log("something");
+    }
     if (password != cPassword) {
       alert("Passwords does not match");
       return;
@@ -95,6 +106,7 @@ const RegisterScreen = () => {
                 type="password"
                 name="password"
                 id="password"
+                minLength="6"
                 required
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -105,6 +117,7 @@ const RegisterScreen = () => {
                 type="password"
                 name="cpassword"
                 id="cpassword"
+                minLength="6"
                 required
                 onChange={(e) => setCPassword(e.target.value)}
               />

@@ -18,7 +18,7 @@ namespace BackendAPI.Controllers
             this._context = context;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet]
         public async Task<ActionResult<List<Orders>>> GetAllOrders()
         {
             return Ok(await _context.Orders.ToListAsync());

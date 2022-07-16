@@ -21,7 +21,7 @@ export const getFoodItemsAsync = () => {
         },
       };
       const response = await axios.get(
-        "https://localhost:7173/api/FoodItems",
+        "https://localhost:7220/api/FoodItems",
         config
       );
       console.log(response);
@@ -44,7 +44,7 @@ export const getItemDetailsAsync = (id) => {
         },
       };
       const response = await axios.get(
-        `https://localhost:7173/api/FoodItems/${id}`,
+        `https://localhost:7220/api/FoodItems/${id}`,
         config
       );
       console.log(response.data);
@@ -67,7 +67,7 @@ export const addFoodItemsAsync = (title, imageUrl, description, price) => {
         },
       };
       const response = await axios.post(
-        "https://localhost:7173/api/FoodItems",
+        "https://localhost:7220/api/FoodItems",
         {
           title,
           imageUrl,

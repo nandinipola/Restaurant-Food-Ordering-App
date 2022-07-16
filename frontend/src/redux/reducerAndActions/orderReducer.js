@@ -21,7 +21,7 @@ export const getCurrentUserOrderAsync = () => {
         },
       };
       const response = await axios.get(
-        `https://localhost:7173/api/Orders/${user.userData.id}`,
+        `https://localhost:7219/api/Orders/${user.userData.id}`,
         config
       );
       console.log(response);
@@ -44,7 +44,7 @@ export const getAllOrderAsync = () => {
         },
       };
       const response = await axios.get(
-        `https://localhost:7173/api/Orders`,
+        `https://localhost:7219/api/Orders`,
         config
       );
       console.log(response);
@@ -67,7 +67,7 @@ export const placeOrderAsync=(order)=>{
         },
       };
       const response = await axios.post(
-        `https://localhost:7173/api/Orders`,
+        `https://localhost:7219/api/Orders`,
         order,
         config
       );
@@ -91,7 +91,7 @@ export const updateOrderAsync=(order)=>{
         },
       };
       const response = await axios.put(
-        `https://localhost:7173/api/Orders`,
+        `https://localhost:7219/api/Orders`,
         order,
         config
       );

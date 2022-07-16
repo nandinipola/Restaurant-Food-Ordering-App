@@ -15,7 +15,7 @@ export const authenticateAsync = (email, password) => {
     try {
       dispatch(loading(true));
       const response1 = await axios.post(
-        "https://localhost:7173/api/User/login",
+        "https://localhost:7131/api/User/login",
         {
           email: email,
           password: password,
@@ -31,7 +31,7 @@ export const authenticateAsync = (email, password) => {
           },
       };
         const response2 = await axios.get(
-          `https://localhost:7173/api/User/${email}`,
+          `https://localhost:7131/api/User/${email}`,
           config
         );
         console.log(response2);
@@ -54,7 +54,7 @@ export const registerAsync = (user) => {
     try {
       dispatch(loading(true));
       const response = await axios.post(
-        "https://localhost:7173/api/User/register",
+        "https://localhost:7131/api/User/register",
         user
       );
       if (response.request.status != 200) throw "Something Went wrong";

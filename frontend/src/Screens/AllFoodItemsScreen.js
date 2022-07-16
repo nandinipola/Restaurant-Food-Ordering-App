@@ -32,7 +32,7 @@ const AllFoodItemsScreen = () => {
           <div className="content-container">
             <h3>{item.title}</h3>
             <p>{item.description}</p>
-            <Link to={`/details/${item.id}`}>Order</Link>
+            <Link to={`/details/${item.id}`}>Add to Cart</Link>
           </div>
         </div>
       );
