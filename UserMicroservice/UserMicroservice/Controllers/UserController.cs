@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authorization;
+using UserMicroservice.Repository;
 
 namespace BackendAPI.Controllers
 {
@@ -19,31 +20,18 @@ namespace BackendAPI.Controllers
     {
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IUserRepository _userRepo;
 
-
-        public UserController(DataContext context, IConfiguration configuration)
+        public UserController(DataContext context, IConfiguration configuration, IUserRepository userRepo)
         {
             this._context = context;
             this._configuration = configuration;
+            this._userRepo= userRepo;
         }
         [HttpPost("register")]
         public async Task<ActionResult<string>> Register(UserDto request)
         {
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
-
-            var user = new Users();
-
-            user.UserName = request.UserName;
-            user.Email = request.Email;
-            user.FirstName = request.FirstName;
-            user.LastName = request.LastName;
-            user.Role = request.Role;
-            user.PhoneNumber = request.PhoneNumber;
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            await this._userRepo.AddUserAsync(request);
             return Ok("User Created!!");
         }
 
@@ -69,8 +57,10 @@ namespace BackendAPI.Controllers
        [HttpGet("{id}"), Authorize]
         public  async Task<ActionResult<Users>> getCurrentUser(string id)
         {
+      
             List<Users> user = await _context.Users.Where(o => o.Email == id).ToListAsync();
-
+         
+            var userData = await _userRepo.GetUserByIdAsync(id);
             return Ok(user[0]);
 
         }
